@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+import logo from './BroaredLogo.png';
 import './App.css';
 import Project from './Project';
 import { useEffect, useState } from 'react';
@@ -17,7 +17,7 @@ export default function App()  {
   const [obj, setObj] = useState([]);
 
   const fetchObjs = async () => {
-    const url = 'http://localhost:8080';
+    const url = 'http://localhost:3000/project';
 
     try{
       const response = await fetch(url);
@@ -33,15 +33,15 @@ export default function App()  {
 
   useEffect(() => {
     fetchObjs();
-   
+    postObjs ();
   }, []);
 
   function postObjs () {
-    fetchObjs();
-    var lastElementId = obj.at(-1).id;
+    
+    
     console.log("Adding a new object");
-    const url = 'http://localhost:8080/data';
-    const data =   {id: lastElementId+1, name: '', img: '', tasks: '', completionlevel: '', technologies: '', authors: '', notes: ''};
+    const url = 'http://localhost:3000/project/post';
+    const data =   {id: '3', name: '', img: '', task: '',  technologies: '', authors: '', notes: ''};
 
     fetch(url, {
       method: 'POST',
@@ -55,29 +55,30 @@ export default function App()  {
     .catch((error) => {
       console.error('Error', error);
     });
-  };
-
-  function putObjs ( putId) {
-    
-    
-    console.log("Putting a new object");
-    const url = 'http://localhost:8080/data/put';
-    const data =   {id: putId, name: '', img: '', tasks: '', completionlevel: '', technologies: '', authors: '', notes: ''};
-
-    fetch(url, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    })
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch((error) => {
-      console.error('Error', error);
-    });
     fetchObjs();
   };
+
+  // function putObjs ( putId) {
+    
+    
+  //   console.log("Putting a new object");
+  //   const url = 'http://localhost:8080/data/put';
+  //   const data =   {id: putId, name: '', img: '', tasks: '', completionlevel: '', technologies: '', authors: '', notes: ''};
+
+  //   fetch(url, {
+  //     method: 'PUT',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify(data),
+  //   })
+  //   .then(response => response.json())
+  //   .then(data => console.log(data))
+  //   .catch((error) => {
+  //     console.error('Error', error);
+  //   });
+  //   fetchObjs();
+  // };
   //  const[projects, setProjects] = useState(proj);
   //  const[name, setName] = useState('');
   //  const[img, setImg] = useState('');
@@ -100,17 +101,19 @@ export default function App()  {
   
   return (
     <div className="App">
-      <h1>Broared</h1>
-      <h2>Visualise Your Projects</h2>
-      <button onClick={postObjs} >New Project</button>
-      <div>
+      <img src = {logo}></img>
+      <h1>Broard</h1>
+      
+      <h2>Visualise Your Project Timelines</h2>
+      {/* <button onClick={postObjs} >New Project</button> */}
+      <div className="card">
+        <div className="container">
         <ol>
         {obj?.map((data) => (
           <>
         
             <ul  key={data.id}>
              <p>Project name: {data.name}<input
-              onChange={putObjs(data.id)}
              /></p> 
               <p>Image: {data.img}<input/></p>
               <p>Tasks: {data.tasks}<input/></p>
@@ -128,6 +131,7 @@ export default function App()  {
         ))}
         </ol>
       </div>
+    </div>
     </div>
       
     // 
