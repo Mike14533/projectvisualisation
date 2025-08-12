@@ -33,7 +33,7 @@ export default function App()  {
 
   useEffect(() => {
     fetchObjs();
-    postObjs ();
+   
   }, []);
 
   function postObjs () {
@@ -41,7 +41,7 @@ export default function App()  {
     
     console.log("Adding a new object");
     const url = 'http://localhost:3000/project/post';
-    const data =   {id: '3', name: '', img: '', task: '',  technologies: '', authors: '', notes: ''};
+    const data =   {id: '', name: '', img: '', task: '',  technologies: '', authors: '', notes: ''};
 
     fetch(url, {
       method: 'POST',
@@ -113,14 +113,14 @@ export default function App()  {
           <>
         
             <ul  key={data.id}>
-             <p>Project name: {data.name}<input
+             <p>Project name: <input className = 'textspace' placeholder={data.name}
              /></p> 
-              <p>Image: {data.img}<input/></p>
-              <p>Tasks: {data.tasks}<input/></p>
-              <p>Completion Level: {data.completionlevel}</p>
-              <p>Technologies: {data.technologies}<input/></p>
-              <p>Authors: {data.authors}<input/></p>
-              <p>Notes: {data.notes}<input/></p>
+              <p>Image: <input className = 'textspace' placeholder={data.img}/></p>
+              <p>Tasks: <input placeholder={data.tasks}/></p>
+              <p>Completion Level: <input placeholder={data.completionLevel}/></p>
+              <p>Technologies: <input placeholder={data.technologies}/></p>
+              <p>Authors: <input placeholder={data.authors}/></p>
+              <p>Notes: <input placeholder={data.notes}/></p>
               
               
               

@@ -36,3 +36,10 @@
     transform: rotate(360deg);
   }
 }
+
+.textspace{
+  outline: none;
+  border: none;
+  font-size: large;
+  text-decoration-color: #282c34e;
+}
