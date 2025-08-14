@@ -3,14 +3,6 @@ import './App.css';
 import Project from './Project';
 import { useEffect, useState } from 'react';
 import React from "react";
-import axios from 'axios';
-
-// const apiCall = () => {
-//   axios.get('http://localhost:8080').then((data) =>{
-//     const obj = JSON.parse(data);
-//     console.log(obj);
-//   });
-// }
 
 
 export default function App()  {
@@ -36,6 +28,7 @@ export default function App()  {
    
   }, []);
 
+  const [putName, setPutName] = useState('');
   function postObjs () {
     
     
@@ -58,45 +51,29 @@ export default function App()  {
     fetchObjs();
   };
 
-  // function putObjs ( putId) {
+   function putObjs ( putId) {
     
-    
-  //   console.log("Putting a new object");
-  //   const url = 'http://localhost:8080/data/put';
-  //   const data =   {id: putId, name: '', img: '', tasks: '', completionlevel: '', technologies: '', authors: '', notes: ''};
+     console.log("putName: " + putName);
+     console.log("PutId: " + putId);
+     console.log("Putting a new object");
+     const url = 'http://localhost:3000/project/put';
+     const data =   {id: putId, name: putName, img: '', tasks: '', completionlevel: '', technologies: '', authors: '', notes: ''};
 
-  //   fetch(url, {
-  //     method: 'PUT',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify(data),
-  //   })
-  //   .then(response => response.json())
-  //   .then(data => console.log(data))
-  //   .catch((error) => {
-  //     console.error('Error', error);
-  //   });
-  //   fetchObjs();
-  // };
-  //  const[projects, setProjects] = useState(proj);
-  //  const[name, setName] = useState('');
-  //  const[img, setImg] = useState('');
-  //  const[technologies, setTech] = useState('');
-  //  const[authors, setAuthors] = useState('');
-  //   function handleClick(){
-  //         console.log("project being added");
-  //   const insertAt = 1;
-  //   const nextProjects = [
-  //     ...projects.slice(0, insertAt),
-  //     {id: nextId++, name: name, img: img, technologies: technologies, authors: authors},
-  //     ...projects.slice(insertAt)
-  //   ];
-  //   setProjects(nextProjects);
-  //  const [data, setData] = React.useState(null);
+     fetch(url, {
+      method: 'PUT',
+       headers: {
+         'Content-Type': 'application/json',
+       },
+       body: JSON.stringify(data),
+     })
+     .then(response => response.json())
+     .then(data => console.log(data))
+     .catch((error) => {
+       console.error('Error', error);
+         });
+         fetchObjs();
+   };
 
-  
-  // };
   
   
   return (
@@ -113,14 +90,20 @@ export default function App()  {
           <>
         
             <ul  key={data.id}>
-             <p>Project name: <input className = 'textspace' placeholder={data.name}
-             /></p> 
-              <p>Image: <input className = 'textspace' placeholder={data.img}/></p>
-              <p>Tasks: <input placeholder={data.tasks}/></p>
-              <p>Completion Level: <input placeholder={data.completionLevel}/></p>
-              <p>Technologies: <input placeholder={data.technologies}/></p>
-              <p>Authors: <input placeholder={data.authors}/></p>
-              <p>Notes: <input placeholder={data.notes}/></p>
+             <p>Project name: <input value = {putName}  onChange={(e) =>{
+              setPutName(e.target.value)
+              putObjs(data.id);
+             }
+             }
+               ></input>
+                <h1>{data.name}</h1>
+             </p> 
+              <p>Image: <h1 contentEditable="true" suppressContentEditableWarning={true} onInput={e => putObjs(data.id, '', e.currentTarget.value, '', '', '', '', '')}>{data.img}</h1></p>
+              <p>Tasks: <h1 contentEditable="true" suppressContentEditableWarning={true} >{data.tasks}</h1></p>
+              <p>Completion Level: <h1 contentEditable="true" suppressContentEditableWarning={true}>{data.completionlevel}</h1></p>
+              <p>Technologies: <h1 contentEditable="true" suppressContentEditableWarning={true}>{data.technologies}</h1></p>
+              <p>Authors: <h1 contentEditable="true" suppressContentEditableWarning={true}>{data.authors}</h1></p>
+              <p>Notes: <h1 contentEditable="true" suppressContentEditableWarning={true}>{data.notes}</h1></p>
               
               
               
@@ -132,63 +115,7 @@ export default function App()  {
         </ol>
       </div>
     </div>
-    </div>
-      
-    // 
-    //   <div>Name: </div>
-    //   <input
-    //   value= {name}
-    //   onChange={e => setImg(e.target.value)}
-    //   />
-    // <div>Image: </div>
-    //   <input
-    //   value= {img}
-    //   onChange={e => setImg(e.target.value)}
-    //   />
-
-    //   <div>Technologies: </div>
-    //   <input
-    //   value= {technologies}
-    //   onChange={e => setImg(e.target.value)}
- 
-    //   />
-
-    //   <div>Authors: </div>
-    //   <input
-    //   value= {authors}
-    //   onChange={e => setImg(e.target.value)}
-    //   />
-    //   <br></br>
-    //   <br></br>
-    //   <button onClick ={handleClick}><h1>Add Projects</h1></button>
-     
-     
-    //     <ul>
-    //          {projects.map(proj =>(
-    // <li key = {proj.id}>
-        
-    //      <div> 
-    //     <h1>Project Name:  {proj.name}</h1>
-    //     <h1>img: <img src={proj.img}></img></h1>
-    //     <h1>Tasks: {proj.tasks}</h1>
-    //     <h1>Completion Level: {proj.completionlevel}</h1>
-    //     <h1>Technologies: {proj.technologies}</h1>
-    //     <h1>Authors: {proj.authors}</h1>
-    //     <h1>notes: {proj.notes}</h1>
-    //     </div>
-       
-    // </li>
-    //          ))}
-    //         </ul>
-      
-    // </div>
- 
-     
-      
-        
-     
-      
-    
+    </div>  
   );
 }
 
