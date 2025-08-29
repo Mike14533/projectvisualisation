@@ -43,3 +43,43 @@
   font-size: large;
   text-decoration-color: black;
 }
+
+.isDone {
+  text-decoration: line-through;
+}
+
+.deleteButton{
+  background-color: #ee5c5c;
+  outline: none;
+  border: none;
+  right: 16rem;
+}
+.projName{
+  border: none;
+  outline: none;
+  font-size: x-large;
+  
+}
+
+::placeholder{
+  color: black;
+  font: bold;
+}
+.draggable {
+  padding: 10px;
+  margin: 5px;
+  background: #f4f4f4;
+  border-radius: 5px;
+  cursor: grab;
+}
+
+.column {
+  background-color: #f2f2f3;
+  border-radius: 5px;
+  padding: 15px;
+  width: 80%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
